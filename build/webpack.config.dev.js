@@ -1,26 +1,16 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const baseConfig = require('./webpack.config.base')
 // const CompressionPlugin = require('compression-webpack-plugin');//制作zip压缩包的插件
+const { smart } = require('webpack-merge')
 
+const devConfig = {
 
-module.exports = {
-  entry: {
-    app: path.join(__dirname, '../src/index.js')
-  },
   output: {
-    path: path.join(__dirname, '../dist'),
     filename: "[name].[hash].js",
   },
-  resolve: {
-    extensions: [".js", ".json", ".jsx", ".css"]
-  },
-  module: {
-    rules: [
-      {
-        test: /.js$/, loader: "babel-loader"
-      }
-    ]
-  },
+
+
   plugins: [
     new HtmlWebpackPlugin({
       title: 'My App',
@@ -31,8 +21,10 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: 3333,
-    open: true,
+    open: false,
     historyApiFallback: true
   }
 
 }
+
+module.exports = smart(baseConfig, devConfig)

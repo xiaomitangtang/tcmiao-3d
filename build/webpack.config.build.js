@@ -1,28 +1,17 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
+const baseConfig = require('./webpack.config.base')
 // const CompressionPlugin = require('compression-webpack-plugin');//制作zip压缩包的插件
+const { smart } = require('webpack-merge')
 
-
-module.exports = {
+const buildConfig = {
   mode: "production",
-  entry: path.join(__dirname, '../src/index.js'),
   output: {
-    path: path.join(__dirname, '../dist'),
     filename: "[name].js",
     libraryTarget: "commonjs2"
   },
-  resolve: {
-    extensions: [".js", ".json", ".jsx", ".css"],
-  },
-  module: {
-    rules: [
-      { test: /.js$/, loader: "babel-loader" }
-    ]
-  },
   plugins: [
     new CleanWebpackPlugin(),
-    // new CompressionPlugin()
-
   ]
 }
+module.exports = smart(baseConfig, buildConfig)
