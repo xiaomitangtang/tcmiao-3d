@@ -51,6 +51,6 @@
     "@babel/polyfill": "^7.8.7",
     "core-js": "^2.6.11",
     "t-digital-gauge2": "0.0.11",
-    "three": "^0.114.0"
+    "three": "^0.137.0"
   }
 }
